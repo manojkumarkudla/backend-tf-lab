@@ -1,22 +1,22 @@
 resource "aws_s3_bucket" "state_file_bucket" {
-    bucket = "talent-academy-manojkudla-lab-tfstate"
+  bucket = "talent-academy-manojkudla-lab-tfstate"
 
-    tags = {
-        Name = "talent-academy-manojkudla-lab-tfstates"
-        Environment = "lab"
-    } 
+  tags = {
+    Name        = "talent-academy-manojkudla-lab-tfstates"
+    Environment = "lab"
+  }
 
-    lifecycle{
-        prevent_destroy = true
-    }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_versioning" "version_my_buket" {
-    bucket = aws_s3_bucket.state_file_bucket.id
-    versioning_configuration {
-      status = "Enabled"
-    }
-  
+  bucket = aws_s3_bucket.state_file_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+
 }
 
 resource "aws_dynamodb_table" "terraform_lock_tbl" {
@@ -30,7 +30,7 @@ resource "aws_dynamodb_table" "terraform_lock_tbl" {
     type = "S"
   }
 
-  tags           = {
+  tags = {
     Name = "terraform-lock"
   }
 }
